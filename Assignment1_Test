@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Test') {
+        stage('Build') {
             agent {
                 docker {
                     image 'node:18-alpine'
@@ -11,13 +11,16 @@ pipeline {
             }
             steps {
                 sh '''
+                    npm ci
+                    npm run build
+                    npm test
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                sh '''
                     echo 'Stage Test'
-                    if [ -e build/index.html ]
-                    then 
-                        echo "exist"
-                    else 
-                        echo "not exist"
-                    fi
                     echo 'Start running test'
                     npm ci
                     npm run build
