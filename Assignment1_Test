@@ -28,8 +28,6 @@ pipeline {
                 sh '''
                     echo 'Stage Test'
                     echo 'Start running test'
-                    npm ci
-                    npm run build
                     npm test
                 '''
             }
