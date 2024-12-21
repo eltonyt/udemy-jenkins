@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                    npm ci
+                    npm run build
+                    npm test
+                '''
+            }
+        }
+        stage('Test') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                    echo 'Stage Test'
+                    echo 'Start running test'
+                    npm test
+                '''
+            }
+        }
+    }
+    post {
+        always {
+            junit 'test-resuilts/junit.xml'
+        }
+    }
+}
