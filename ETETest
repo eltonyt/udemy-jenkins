@@ -52,10 +52,12 @@ pipeline {
 
     post {
         always {
-            if (fileExists('jest-results/junit.xml')) {
-                junit 'jest-results/junit.xml'
-            } else {
-                echo 'JUnit report not found. Skipping test result publication.'
+            script {
+                if (fileExists('jest-results/junit.xml')) {
+                    junit 'jest-results/junit.xml'
+                } else {
+                    echo 'JUnit report not found. Skipping test result publication.'
+                }
             }
         }
     }
