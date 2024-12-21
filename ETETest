@@ -35,7 +35,7 @@ pipeline {
         stage('ETE') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/playwright:v1.49.3'
+                    image 'mcr.microsoft.com/playwright:v1.49.1-jammy'
                     reuseNode true
                 }
             }
