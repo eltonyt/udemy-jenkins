@@ -54,7 +54,7 @@ pipeline {
                 stage('ETE Test') {
                     agent {
                         docker {
-                            image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                            image 'my-play-wright'
                             reuseNode true
                         }
                     }
@@ -99,7 +99,7 @@ pipeline {
         stage('Staging ETE Test') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                    image 'my-play-wright'
                     reuseNode true
                 }
             }
@@ -144,7 +144,7 @@ pipeline {
         stage('Prod ETE Test') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                    image 'my-play-wright'
                     reuseNode true
                 }
             }
