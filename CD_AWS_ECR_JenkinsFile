@@ -35,6 +35,7 @@ pipeline {
             }
             steps {
                 sh '''
+                    amazon-linux-extras install docker
                     docker build -f DockerFile-ECR -t myjenkinsapp .
                 '''
             }
