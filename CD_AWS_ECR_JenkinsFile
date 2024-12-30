@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         AWS_DEFAULT_REGION = "us-east-1"
+        APP_NAME = "learningcicd"
         AWS_ECS_CLUSTER = "LearnJenkinsApp-Cluster"
         AWS_ECS_SERVICE = "LearnJenkinsApp-Service-Prod"
         AWS_ECS_TASK_DEFINITION = "LearnJenkinsApp-TaskDefinition-Prod"
@@ -37,9 +38,9 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'aws-s3-key', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
                     sh '''
-                        docker build -f DockerFile-ECR -t $AWS_ECR_REGISTRY/learning/cicd/myjenkinsapp:1.0 .
+                        docker build -f DockerFile-ECR -t $AWS_ECR_REGISTRY/$APP_NAME:1.0 .
                         aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
-                        docker push $AWS_ECR_REGISTRY/learning/cicd/myjenkinsapp:1.0
+                        docker push $AWS_ECR_REGISTRY/$APP_NAME:1.0
                     '''
                 }
             }
